@@ -67,7 +67,7 @@
     position: absolute;
     color: red;
     font-size: 1rem;
-    animation: floatUp 5s linear forwards;
+    animation: floatUp 5s linear infinite;
     opacity: 0.8;
   }
 
@@ -85,14 +85,11 @@
 
   button {
     padding: 10px 20px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 10px;
   }
 
   button:hover {
@@ -100,15 +97,13 @@
   }
 
   .yes {
-    background: green; /* Accept button */
-    color: white;
-    font-weight: bold;
+    background: green;
+    color: black;
   }
 
   .no {
-    background: red; /* No Thanks button */
+    background: red;
     color: white;
-    font-weight: bold;
   }
 
   iframe {
@@ -146,7 +141,8 @@ const body = document.body;
 function showMessage(index) {
   messageEl.innerHTML = messages[index];
   messageEl.classList.add('active');
-  body.style.background = `rgba(0,0,0,${0.9 - index*0.15})`; // gradual background brighten
+  // gradual background brighten
+  body.style.background = `rgba(0,0,0,${0.9 - index*0.15})`;
   if (index === messages.length - 1) {
     rope.style.display = 'none';
     showButtons();
@@ -157,15 +153,15 @@ function showButtons() {
   const buttonsDiv = document.createElement('div');
   buttonsDiv.classList.add('buttons');
   buttonsDiv.innerHTML = `
-    <button class="yes">Accept</button>
-    <button class="no">No Thanks</button>
+    <button class="yes">Yes 💛</button>
+    <button class="no">No 💔</button>
   `;
   messageEl.appendChild(buttonsDiv);
 
   buttonsDiv.querySelector('.yes').addEventListener('click', () => {
     messageEl.innerHTML = "There's a song from me… would you like to hear it with your heart?<br>";
     const songButton = document.createElement('button');
-    songButton.innerText = "🎵 Play Song";
+    songButton.innerText = "Play Song 🎵";
     songButton.classList.add('yes');
     songButton.style.marginTop = '20px';
     songButton.addEventListener('click', () => {
