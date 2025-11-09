@@ -67,7 +67,7 @@
     position: absolute;
     color: red;
     font-size: 1rem;
-    animation: floatUp 5s linear infinite;
+    animation: floatUp 5s linear forwards;
     opacity: 0.8;
   }
 
@@ -85,11 +85,14 @@
 
   button {
     padding: 10px 20px;
-    font-size: 1.2rem;
+    font-size: 1.5rem; /* bigger text for visibility */
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   button:hover {
@@ -99,11 +102,13 @@
   .yes {
     background: gold;
     color: black;
+    font-weight: bold;
   }
 
   .no {
     background: red;
     color: white;
+    font-weight: bold;
   }
 
   iframe {
@@ -153,15 +158,15 @@ function showButtons() {
   const buttonsDiv = document.createElement('div');
   buttonsDiv.classList.add('buttons');
   buttonsDiv.innerHTML = `
-    <button class="yes">Yes 💛</button>
-    <button class="no">No 💔</button>
+    <button class="yes">💛 Yes</button>
+    <button class="no">💔 No</button>
   `;
   messageEl.appendChild(buttonsDiv);
 
   buttonsDiv.querySelector('.yes').addEventListener('click', () => {
     messageEl.innerHTML = "There's a song from me… would you like to hear it with your heart?<br>";
     const songButton = document.createElement('button');
-    songButton.innerText = "Play Song 🎵";
+    songButton.innerText = "🎵 Play Song";
     songButton.classList.add('yes');
     songButton.style.marginTop = '20px';
     songButton.addEventListener('click', () => {
