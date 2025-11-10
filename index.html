@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Suspense note from Tharunessh</title>
+<title>Divashine Proposal</title>
 <style>
   body {
     margin: 0;
@@ -97,13 +97,15 @@
   }
 
   .yes {
-    background: gold;
-    color: black;
+    background: green; /* Green for Accept */
+    color: white;
+    font-weight: bold;
   }
 
   .no {
-    background: red;
+    background: red; /* Red for No Thanks */
     color: white;
+    font-weight: bold;
   }
 
   iframe {
@@ -118,7 +120,7 @@
 
 <div class="message-container" id="message">
   Hi, Divashine... I'm here for a notes for you. I know I keep you waiting so long. Sorry for that, forgive me.<br><br>
-  Pull the red bar on the side to get into the suspense notes.
+  Pull the rope on the side to get into the suspense notes.
 </div>
 
 <div class="rope" id="rope"></div>
@@ -153,15 +155,22 @@ function showButtons() {
   const buttonsDiv = document.createElement('div');
   buttonsDiv.classList.add('buttons');
   buttonsDiv.innerHTML = `
-    <button class="yes">I Accept</button>
-    <button class="no">Sorry no thanks</button>
+    <button class="yes">Accept</button>
+    <button class="no">No Thanks</button>
   `;
   messageEl.appendChild(buttonsDiv);
 
+  // When she clicks "Accept"
   buttonsDiv.querySelector('.yes').addEventListener('click', () => {
+    fetch("https://formspree.io/f/xzzypnkg", {
+      method: "POST",
+      headers: { 'Accept': 'application/json' },
+      body: JSON.stringify({ choice: "Accept", from: "Divashine Proposal 💚" })
+    });
+
     messageEl.innerHTML = "There's a song from me… would you like to hear it with your heart?<br>";
     const songButton = document.createElement('button');
-    songButton.innerText = "Play Song 🎵";
+    songButton.innerText = "🎵 Play Song";
     songButton.classList.add('yes');
     songButton.style.marginTop = '20px';
     songButton.addEventListener('click', () => {
@@ -176,12 +185,18 @@ function showButtons() {
     messageEl.appendChild(songButton);
   });
 
+  // When she clicks "No Thanks"
   buttonsDiv.querySelector('.no').addEventListener('click', () => {
+    fetch("https://formspree.io/f/xzzypnkg", {
+      method: "POST",
+      headers: { 'Accept': 'application/json' },
+      body: JSON.stringify({ choice: "No Thanks", from: "Divashine Proposal 💔" })
+    });
     messageEl.innerHTML = "It's okay… you'll always be special ✨";
   });
 }
 
-// Drag functionality for mobile
+// Rope drag (mobile-friendly)
 let isDragging = false;
 let startY = 0;
 
@@ -196,7 +211,7 @@ rope.addEventListener('touchmove', e => {
   let diff = touchY - startY;
   if(diff > 0) {
     rope.style.transform = `translateY(calc(-50% + ${diff}px))`;
-    messageEl.style.opacity = 0.5 + Math.min(diff/300, 0.5); // brighten effect
+    messageEl.style.opacity = 0.5 + Math.min(diff/300, 0.5);
   }
 });
 
@@ -206,7 +221,7 @@ rope.addEventListener('touchend', e => {
   let touchY = e.changedTouches[0].clientY;
   let diff = touchY - startY;
   rope.style.transform = `translateY(-50%)`;
-  if (diff > 100) { // pulled enough
+  if (diff > 100) {
     current++;
     if (current < messages.length) {
       messageEl.classList.remove('active');
@@ -215,6 +230,7 @@ rope.addEventListener('touchend', e => {
   }
 });
 
+// Floating hearts animation
 function createHeart() {
   const heart = document.createElement('div');
   heart.classList.add('heart');
