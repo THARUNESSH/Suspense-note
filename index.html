@@ -97,13 +97,13 @@
   }
 
   .yes {
-    background: green; /* Green for Accept */
+    background: green; /* Accept button color */
     color: white;
     font-weight: bold;
   }
 
   .no {
-    background: red; /* Red for No Thanks */
+    background: red; /* No Thanks button color */
     color: white;
     font-weight: bold;
   }
@@ -119,7 +119,7 @@
 <div class="hearts"></div>
 
 <div class="message-container" id="message">
-  Hi, Divashine... I'm here for a notes for you. I know I keep you waiting so long. Sorry for that, forgive me.<br><br>
+  Hi, Divashine... I'm here for a note for you. I know I kept you waiting so long. Sorry for that, forgive me.<br><br>
   Pull the rope on the side to get into the suspense notes.
 </div>
 
@@ -127,7 +127,7 @@
 
 <script>
 const messages = [
-  "Hi, Divashine... I'm here for a notes for you. I know I keep you waiting so long. Sorry for that, forgive me.<br><br>Pull the rope on the side to get into the suspense notes.",
+  "Hi, Divashine... I'm here for a note for you. I know I kept you waiting so long. Sorry for that, forgive me.<br><br>Pull the rope on the side to get into the suspense notes.",
   "I'm here to say you make me comfortable around you. I can be myself.",
   "I don't know about your past love, but everyone is not the same. I have few dreams about how I’ll take care of my soul partner without breaking their heart.",
   "One day we all gonna die. Why not my soul leave beside on you?",
@@ -143,7 +143,6 @@ const body = document.body;
 function showMessage(index) {
   messageEl.innerHTML = messages[index];
   messageEl.classList.add('active');
-  // gradual background brighten
   body.style.background = `rgba(0,0,0,${0.9 - index*0.15})`;
   if (index === messages.length - 1) {
     rope.style.display = 'none';
@@ -160,7 +159,7 @@ function showButtons() {
   `;
   messageEl.appendChild(buttonsDiv);
 
-  // When she clicks "Accept"
+  // Accept button
   buttonsDiv.querySelector('.yes').addEventListener('click', () => {
     fetch("https://formspree.io/f/xzzypnkg", {
       method: "POST",
@@ -169,24 +168,23 @@ function showButtons() {
     });
 
     messageEl.innerHTML = "There's a song from me… would you like to hear it with your heart?<br>";
-const songButton = document.createElement('button');
-songButton.innerText = "🎵 Play Song";
-songButton.classList.add('yes');
-songButton.style.marginTop = '20px';
-songButton.addEventListener('click', () => {
-  const iframe = document.createElement('iframe');
-  iframe.width = "300";
-  iframe.height = "150";
-  iframe.src = "https://www.youtube.com/embed/HJ62VFi8Sks?autoplay=1";
-  iframe.allow = "autoplay";
-  messageEl.appendChild(iframe);
-  songButton.style.display = 'none';
-});
-messageEl.appendChild(songButton);
-
+    const songButton = document.createElement('button');
+    songButton.innerText = "🎵 Play Song";
+    songButton.classList.add('yes');
+    songButton.style.marginTop = '20px';
+    songButton.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.width = "300";
+      iframe.height = "150";
+      iframe.src = "https://www.youtube.com/embed/HJ62VFi8Sks?autoplay=1";
+      iframe.allow = "autoplay";
+      messageEl.appendChild(iframe);
+      songButton.style.display = 'none';
+    });
+    messageEl.appendChild(songButton);
   });
 
-  // When she clicks "No Thanks"
+  // No Thanks button
   buttonsDiv.querySelector('.no').addEventListener('click', () => {
     fetch("https://formspree.io/f/xzzypnkg", {
       method: "POST",
@@ -197,7 +195,7 @@ messageEl.appendChild(songButton);
   });
 }
 
-// Rope drag (mobile-friendly)
+// Rope pull (mobile)
 let isDragging = false;
 let startY = 0;
 
