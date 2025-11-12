@@ -169,20 +169,21 @@ function showButtons() {
     });
 
     messageEl.innerHTML = "There's a song from me… would you like to hear it with your heart?<br>";
-    const songButton = document.createElement('button');
-    songButton.innerText = "🎵 Play Song";
-    songButton.classList.add('yes');
-    songButton.style.marginTop = '20px';
-    songButton.addEventListener('click', () => {
-      const iframe = document.createElement('iframe');
-      iframe.width = "300";
-      iframe.height = "150";
-      iframe.src = "https://www.youtube.com/watch?v=HJ62VFi8Sks?autoplay=1";
-      iframe.allow = "autoplay";
-      messageEl.appendChild(iframe);
-      songButton.style.display = 'none';
-    });
-    messageEl.appendChild(songButton);
+const songButton = document.createElement('button');
+songButton.innerText = "🎵 Play Song";
+songButton.classList.add('yes');
+songButton.style.marginTop = '20px';
+songButton.addEventListener('click', () => {
+  const iframe = document.createElement('iframe');
+  iframe.width = "300";
+  iframe.height = "150";
+  iframe.src = "https://www.youtube.com/embed/HJ62VFi8Sks?autoplay=1";
+  iframe.allow = "autoplay";
+  messageEl.appendChild(iframe);
+  songButton.style.display = 'none';
+});
+messageEl.appendChild(songButton);
+
   });
 
   // When she clicks "No Thanks"
